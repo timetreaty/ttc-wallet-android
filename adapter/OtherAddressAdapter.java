@@ -1,0 +1,66 @@
+package com.example.administrator.ttc.adapter;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+import com.example.administrator.ttc.R;
+import com.example.administrator.ttc.bean.MyAlwaysAddressBean;
+
+import java.util.List;
+
+/**
+ * Created by Administrator on 2018/10/17/017.
+ */
+
+public class OtherAddressAdapter extends BaseAdapter {
+    private Context context;
+    private List<MyAlwaysAddressBean.DataBean> list;
+
+    public OtherAddressAdapter(Context context, List<MyAlwaysAddressBean.DataBean> list) {
+        this.context = context;
+        this.list = list;
+    }
+
+    @Override
+    public int getCount() {
+        return list.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return position;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.my_always_dress_tiem, parent, false);
+            holder = new ViewHolder();
+            holder.my_always_dress_beizhu = convertView.findViewById(R.id.my_always_dress_beizhu);
+            holder.my_always_dress_content = convertView.findViewById(R.id.my_always_dress_content);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+        holder.my_always_dress_beizhu.setText(list.get(position).getAddressName() + "-" + list.get(position).getCurrency());
+        holder.my_always_dress_content.setText(list.get(position).getAddress());
+        return convertView;
+
+    }
+
+    class ViewHolder {
+        TextView my_always_dress_beizhu;
+        TextView my_always_dress_content;
+    }
+
+}
